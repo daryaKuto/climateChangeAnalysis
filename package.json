@@ -1,0 +1,33 @@
+{
+  "name": "climate_report",
+  "version": "1.1.0",
+  "description": "How climate change will affect property owners in 2040-2070",
+  "author": "Darya Kutovaya",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "react-dev": "webpack --config ./webpack.config.js  -w"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.3",
+    "node-zillow": "^2.0.0",
+    "pg": "^8.7.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "underscore": "^1.12.1"
+  }
+}
