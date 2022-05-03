@@ -3,26 +3,13 @@ const psql = require("./database/queries.js");
 const express = require("express");
 const axios = require("axios").default;
 const app = express();
-const Zillow = require("node-zillow");
-//const rapidApi = require('./rapidApi.js')
+
+const rapidApi = require('./rapidApi.js')
 const PORT = 3000;
 //../../client/dist
 const staticPath = path.join(__dirname, "..", "/client/dist/");
 app.use(express.static(staticPath));
 app.use(express.json());
-
-// official zillow api has been shut down in february 2021 and was not announced on their website (twitter only)
-// const zillow = new Zillow("X1-ZWz1ina9bqrh1n_23up5");
-
-// app.get("/official-zillow-api", (req, res) => {
-//   var parameters = req.query;
-//   console.log(req.query);
-//   zillow.get("GetSearchResults", parameters).then((results) => {
-    // Zillow API IS DEAD, LONG LIVE ZILLOW API (error code 410)
-//     console.log(results);
-//     res.send(results);
-//   });
-// });
 
 // get property overview params: zipcode
 app.get("/county", (req, res) => {
