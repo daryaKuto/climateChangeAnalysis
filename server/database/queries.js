@@ -29,8 +29,8 @@ const getCounty = (zipObj, callback) => {
     if (err) {
       console.log(`${err} : unable to retrieve products from the database`);
     } else {
-      //console.log('receiving data from posgre db:');
-      //console.log(results.rows)
+      console.log('receiving data from posgre db:');
+      console.log(results.rows)
       callback(null, results.rows);
         }
       })

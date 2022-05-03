@@ -12,21 +12,21 @@ app.use(express.static(staticPath));
 app.use(express.json());
 
 // official zillow api has been shut down in february 2021 and was not announced on their website (twitter only)
-const zillow = new Zillow("X1-ZWz1ina9bqrh1n_23up5");
+// const zillow = new Zillow("X1-ZWz1ina9bqrh1n_23up5");
 
-app.get("/official-zillow-api", (req, res) => {
-  var parameters = req.query;
-  console.log(req.query);
-  zillow.get("GetSearchResults", parameters).then((results) => {
+// app.get("/official-zillow-api", (req, res) => {
+//   var parameters = req.query;
+//   console.log(req.query);
+//   zillow.get("GetSearchResults", parameters).then((results) => {
     // Zillow API IS DEAD, LONG LIVE ZILLOW API (error code 410)
-    console.log(results);
-    res.send(results);
-  });
-});
+//     console.log(results);
+//     res.send(results);
+//   });
+// });
 
 // get property overview params: zipcode
 app.get("/county", (req, res) => {
-  console.log(req.query);
+  //console.log(req.query);
   var zipObj = req.query;
   psql.getCounty(zipObj, (err, data) => {
     if (err) {
@@ -59,8 +59,8 @@ app.get("/zpid", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      console.log("should give metadata with zpid");
-      console.log(response.data.results[0]);
+      // console.log("should give metadata with zpid");
+      // console.log(response.data.results[0]);
       var metaData = response.data.results[0];
       res.status(200).send(metaData);
     })
@@ -85,9 +85,9 @@ app.get("/getproperty", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      console.log("should give property bathrooms and bedrooms");
-      console.log(response.data.property.bathrooms);
-      console.log(response.data.property.bedrooms);
+      // console.log("should give property bathrooms and bedrooms");
+      // console.log(response.data.property.bathrooms);
+      // console.log(response.data.property.bedrooms);
       var propertyData = response.data.property;
       res.status(200).send(propertyData);
     })
