@@ -1,19 +1,26 @@
 const { Pool, Client } = require("pg");
-const pool = new Pool({
-  user: "daryakutovaya",
-  host: "localhost", //127.0.0.1
-  database: "climate_change",
-  password: "password",
-  port: 5432,
-});
+require("dotenv").config();
 
-const client = new Client({
-  user: "daryakutovaya",
-  host: "localhost",
-  database: "climate_change",
-  password: "password",
-  port: 5432,
-});
+
+//another option:
+// const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}:${process.env.PG_HOST}:${process.env.PG_PORT}:${process.env.PG_DATABASE}`;
+
+const devConfig = {
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
+}
+
+//for heroku addon
+const proConfig = {
+  connectionString: process.env.DATABASE_URL,
+}
+
+const client = new Client(
+  process.env.NODE_ENV === "production" ? proConfig : devConfig
+);
 
 client.connect();
 

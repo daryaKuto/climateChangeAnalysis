@@ -5,11 +5,23 @@ const axios = require("axios").default;
 const app = express();
 
 const rapidApi = require('./rapidApi.js')
-const PORT = 3000;
+//process.env.PORT
+const PORT = process.env.PORT || 3000;
 //../../client/dist
-const staticPath = path.join(__dirname, "..", "/client/dist/");
-app.use(express.static(staticPath));
+//const staticPath = path.join(__dirname, "..", "/client/dist/")
+const staticPath = path.join(__dirname, "..","/client/dist/");
+//uncomment to see locally
+//app.use(express.static(staticPath));
+
 app.use(express.json());
+
+if (process.env.NODE_ENV === "production") {
+  //server static content
+  //npm run build
+  app.use(express.static(staticPath));
+
+}
+
 
 // get property overview params: zipcode
 app.get("/county", (req, res) => {
@@ -83,6 +95,10 @@ app.get("/getproperty", (req, res) => {
     });
 });
 
+app.get("*", (req, res) => {
+  res.sendFile(staticPath)
+});
+
 app.listen(PORT, () => {
-  console.log("Listening at http://localhost:" + PORT);
+  console.log("Listening at http://localhost:3000 or " + PORT);
 });
