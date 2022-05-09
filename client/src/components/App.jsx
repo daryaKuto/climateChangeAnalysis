@@ -40,21 +40,21 @@ const App = () => {
 
 
   // official zillow api has been shut down in february 2021 and was not announced on their website (twitter only)
-  const searchZillowAPI = (addressInput) => {
-    axios
-      .get("/official-zillow-api", {
-        params: {
-          address: `${addressInput.address}`,
-          citystatezip: `${addressInput.citystate}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  // const searchZillowAPI = (addressInput) => {
+  //   axios
+  //     .get("/official-zillow-api", {
+  //       params: {
+  //         address: `${addressInput.address}`,
+  //         citystatezip: `${addressInput.citystate}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // };
 
   //RAPID API - Zillow Alternative
   // 1. use input address get zpid that it is listed under on zillow
