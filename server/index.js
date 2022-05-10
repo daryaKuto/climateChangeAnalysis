@@ -11,9 +11,10 @@ const PORT = process.env.PORT || 3000;
 //const staticPath = path.join(__dirname, "..", "/client/dist/")
 const staticPath = path.join(__dirname, "..","/client/dist/");
 //uncomment to see locally
-//app.use(express.static(staticPath));
+app.use(express.static(staticPath));
 
 app.use(express.json());
+
 
 if (process.env.NODE_ENV === "production") {
   //server static content
