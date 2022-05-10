@@ -11,8 +11,8 @@
     "npm": "8.8.0"
   },
   "scripts": {
-    "start": "nodemon server/index.js",
-    "heroku-postbuild": "npm install && react-dev",
+    "start": "nodemon server/index.js && npm run react-dev",
+    "heroku-postbuild": "npm install && npm run react-dev",
     "react-dev": "webpack --config ./webpack.config.js  -w"
   },
   "devDependencies": {
