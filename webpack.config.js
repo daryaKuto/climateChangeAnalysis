@@ -3,7 +3,6 @@ var SRC_DIR = path.join(__dirname, '/client/src');
 var DIST_DIR = path.join(__dirname, '/client/dist');
 
 module.exports = {
-  watch: true,
   mode: 'development',
   entry: `${SRC_DIR}/index.js`,
   output: {
@@ -38,7 +37,11 @@ module.exports = {
         use: {
           loader: 'url-loader',
         },
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
     ],
   }
 };
