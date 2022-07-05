@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
-import img_fires from "../images/img_fires.png";
-import img_farm from "../images/img_farm.png";
-import img_econ_damages from "../images/img_econ_damages.png";
-import img_sea_level from "../images/img_sea_level.png";
-import img_heat from "../images/img_heat.png";
-//client/src/images
+import imagesCSS from "./images.css";
+import {BsArrowRightCircle} from 'react-icons/bs';
+import {BsArrowLeftCircle} from 'react-icons/bs';
+import Image from './Image.jsx'
 
-//src={require('../images/img_fires.png')}
 
-const Images = () => {
-  //images with correlated text
-  //flex rows for image container
-  //flex column for individual image and text
-
-  const [image, setImage] = useState("");
+const Images = ({ images }) => {
+  //const [image, setImage] = useState("");
   const [noImage, setReplacement] = useState(
     "https://www.budget101.com/images/image-not-available.png?14867"
   );
 
+  const scrollRightCarousel = () => {
+    document.querySelector('#carousel').scrollLeft += 200;
+  };
+
+  const scrollLeftCarousel = () => {
+    document.querySelector('#carousel').scrollLeft += -200;
+  };
+
+
   return (
-    <div className="image-container">
-     images from zillow in glalery go here
+    <div className = 'outer-carousel'>
+      <BsArrowLeftCircle className="arrowLeft" onClick={scrollLeftCarousel} />
+    <div id = 'carousel' className="image-container">
+        {images.map((image) => {
+          return (
+            <Image key = {images.indexOf(image)} image = {image} noImage = {noImage} />
+              // <img className="image" key = {images.indexOf(image)} src = {image === null ? noImage : image}/>
+          );
+        })}
+    </div>
+    <BsArrowRightCircle className="arrowRight" onClick={scrollRightCarousel}/>
     </div>
   );
 };

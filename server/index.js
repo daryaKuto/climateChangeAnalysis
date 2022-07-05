@@ -12,7 +12,6 @@ const staticPath = path.join(__dirname, "..", "/client/dist/");
 //uncomment to see locally
 app.use(express.static(staticPath));
 
-
 app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
@@ -41,6 +40,94 @@ app.get("/county", (req, res) => {
 //1095 Natoma St #1, San Francisco, CA 94103
 //4040 Mantova Dr, Los Angeles, CA 90008
 
+///////////////////////////////////////
+
+app.get("/zpid", (req, res) => {
+  var queryString = req.query.searchString;
+  var options = {
+    method: "GET",
+    url: "https://zillow-com1.p.rapidapi.com/propertyExtendedSearch",
+    params: {
+      location: `${queryString}`,
+      //optional: houses, apartments
+      home_type: "",
+    },
+    headers: {
+      "X-RapidAPI-Key": "3f67dd59b8msh0bf1aa122e11ed2p1f34fdjsn22bc97f6840e",
+      "X-RapidAPI-Host": "zillow-com1.p.rapidapi.com",
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+      res.status(200).send(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
+/////////////////////////////////
+
+app.get("/getproperty", (req, res) => {
+  var queryZpid = req.query.zpid;
+  const options = {
+    method: "GET",
+    url: "https://zillow-com1.p.rapidapi.com/property",
+    params: { zpid: `${queryZpid}` },
+    headers: {
+      "X-RapidAPI-Key": "3f67dd59b8msh0bf1aa122e11ed2p1f34fdjsn22bc97f6840e",
+      "X-RapidAPI-Host": "zillow-com1.p.rapidapi.com",
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      //print all property info
+      //console.log(response.data);
+      var propertyData = response.data;
+      res.status(200).send(propertyData);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
+
+///////////////////////////////
+
+app.get("/getimages", (req, res) => {
+  var queryZpid = req.query.zpid;
+  const options = {
+    method: "GET",
+    url: "https://zillow-com1.p.rapidapi.com/images",
+    params: { zpid: `${queryZpid}` },
+    headers: {
+      "X-RapidAPI-Key": "3f67dd59b8msh0bf1aa122e11ed2p1f34fdjsn22bc97f6840e",
+      "X-RapidAPI-Host": "zillow-com1.p.rapidapi.com",
+    },
+  };
+  axios
+    .request(options)
+    .then(function (response) {
+      console.log(response.data);
+       res.status(200).send(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+  });
+//////////////////////////////////
+app.get("*", (req, res) => {
+  res.sendFile(staticPath);
+});
+
+app.listen(PORT, () => {
+  console.log("Listening at http://localhost:3000 or " + PORT);
+});
+
+/*
 //works in postman
 app.get("/zpid", (req, res) => {
   var queryString = req.query.searchString;
@@ -69,7 +156,8 @@ app.get("/zpid", (req, res) => {
 
 app.get("/getproperty", (req, res) => {
   var queryZpid = req.query.zpid;
-
+  // I CAN SEE ZPID: 122064067
+  console.log(queryZpid);
   const options = {
     method: "GET",
     url: "https://zillow-zestimate.p.rapidapi.com/get-property",
@@ -82,9 +170,8 @@ app.get("/getproperty", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      // console.log("should give property bathrooms and bedrooms");
-      // console.log(response.data.property.bathrooms);
-      // console.log(response.data.property.bedrooms);
+      //I GET ERROR ON THIS LINE { error: 'api error, please contact us.', success: false }
+      console.log(response.data);
       var propertyData = response.data.property;
       res.status(200).send(propertyData);
     })
@@ -92,11 +179,4 @@ app.get("/getproperty", (req, res) => {
       console.error(error);
     });
 });
-
-app.get("*", (req, res) => {
-  res.sendFile(staticPath);
-});
-
-app.listen(PORT, () => {
-  console.log("Listening at http://localhost:3000 or " + PORT);
-});
+*/
