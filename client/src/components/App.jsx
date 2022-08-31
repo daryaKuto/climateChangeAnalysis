@@ -8,6 +8,7 @@ import Footer from "./Footer.jsx";
 import Nav from "./Nav.jsx";
 import About from "./About.jsx";
 
+
 const App = () => {
   //useState for display of information from api call
   const [searched, showModal] = useState(false);

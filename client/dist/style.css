@@ -38,9 +38,33 @@ body {
 }
 
 /* General Styles */
-.app {
-  width: var(--container-width-lg);
+.main {
+  width: 90%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1ft auto 1fr;
   margin: 0 auto;
+}
+
+.title {
+  grid-column: 1/-1;
+}
+
+.search-container {
+  grid-column: 1/-1;
+}
+
+.about {
+  grid-column: 1/-1;
+}
+
+.modal {
+  grid-column: 1/-1;
+}
+
+.footer_container {
+  grid-column: 1/-1;
 }
 
 h1,

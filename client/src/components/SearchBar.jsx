@@ -129,7 +129,8 @@ const SearchBar = ({
           placeholder="Unit/House"
           className="house_input"
         />
-         <div className="clear-btn" onClick={() => {clearInputFields()}}>
+      </div>
+        <div className="clear-btn" onClick={() => {clearInputFields()}}>
         <MdOutlineClear />
         </div>
          <div className="search-btn" value="Search"
@@ -137,8 +138,6 @@ const SearchBar = ({
               handleSearch()}}>
           <FaSearchLocation />
         </div>
-       
-      </div>
     </div>
   );
 };
