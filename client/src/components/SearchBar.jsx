@@ -24,6 +24,9 @@ const SearchBar = ({
     zipcode: "",
   });
 
+  //suggestions 
+  const [suggested, setSuggestion] = useState(true);
+
   //autofill
   const [street, setStreet] = useState("");
   const [unit, setUnit] = useState("");
@@ -59,6 +62,7 @@ const SearchBar = ({
           citystate: `${splittedFull[1]},${splittedStateZip[0]}`,
           zipcode: splittedStateZip[1],
         });
+        setSuggestion(false);
 
       })
       .catch((error) => console.error(error));
@@ -100,10 +104,9 @@ const SearchBar = ({
                   placeholder: "Enter address",
                 })} 
               />
-              
+              {suggested && address ?
               <div className="suggestions">
                 {suggestions.map((suggestion) => {
-                  // console.log(suggestion);
                   const style = {
                     backgroundColor: suggestion.active ? "#bcd4f8" : "#fff",
                   };
@@ -114,7 +117,7 @@ const SearchBar = ({
                     </div>
                   );
                 })}
-              </div>
+              </div> : null}
             </div>
           )}
         </PlacesAutocomplete>
@@ -131,12 +134,12 @@ const SearchBar = ({
         />
       </div>
         <div className="clear-btn" onClick={() => {clearInputFields()}}>
-        <MdOutlineClear />
+        <MdOutlineClear className="clear-btn-icon" />
         </div>
          <div className="search-btn" value="Search"
             onClick={() => {
               handleSearch()}}>
-          <FaSearchLocation />
+          <FaSearchLocation className="clear-btn-icon" />
         </div>
     </div>
   );
