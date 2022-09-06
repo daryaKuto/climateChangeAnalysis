@@ -27,6 +27,14 @@ const SearchBar = ({
   //suggestions 
   const [suggested, setSuggestion] = useState(true);
 
+  //refresh page after the fields are cleared
+//   const [rerender, setRerender] = useState(false);
+
+
+// useEffect(()=>{
+//   setSuggestion(true);
+// }, [address]); 
+
   //autofill
   const [street, setStreet] = useState("");
   const [unit, setUnit] = useState("");
@@ -36,8 +44,11 @@ const SearchBar = ({
  const clearInputFields = () => {
   setAddress('');
   setUnit('');
+  setStreet('');
+  setSuggestion(true);
  }
 
+ 
 
   const unitValueChange = (e) => {
     e.preventDefault();
@@ -82,6 +93,11 @@ const SearchBar = ({
 
   return (
     <div className="search-container">
+       <div className="search-btn" value="Search"
+            onClick={() => {
+              handleSearch()}}>
+          <FaSearchLocation className="clear-btn-icon" />
+        </div>
         <PlacesAutocomplete className = "autocomplete-suggestions"
           value={address}
           onChange={setAddress}
@@ -101,18 +117,20 @@ const SearchBar = ({
                 {...getInputProps({
                   className: "my-input",
                   autoFocus: false,
-                  placeholder: "Enter address",
+                  placeholder: "Enter address to search...",
                 })} 
               />
-              {suggested && address ?
+              {suggested ?
               <div className="suggestions">
                 {suggestions.map((suggestion) => {
                   const style = {
                     backgroundColor: suggestion.active ? "#bcd4f8" : "#fff",
+                    margin: "10px",
+                    fontSize: "0.8rem"
                   };
 
                   return (
-                    <div {...getSuggestionItemProps(suggestion, { style })}>
+                    <div className = "suggestion" {...getSuggestionItemProps(suggestion, { style })}>
                       {suggestion.description}
                     </div>
                   );
@@ -136,11 +154,7 @@ const SearchBar = ({
         <div className="clear-btn" onClick={() => {clearInputFields()}}>
         <MdOutlineClear className="clear-btn-icon" />
         </div>
-         <div className="search-btn" value="Search"
-            onClick={() => {
-              handleSearch()}}>
-          <FaSearchLocation className="clear-btn-icon" />
-        </div>
+        
     </div>
   );
 };

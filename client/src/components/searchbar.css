@@ -9,53 +9,62 @@
   grid-template-columns: 1fr 1fr; */
   display: flex;
   border: 1px solid blue;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  background-color: var(--color-light);
+  align-items: center;
+  max-width: fit-content;
+  min-width: 460px;
 }
 
-
+/* 
 .autocomplete-container {
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   flex: 2;
   width: 100%;
   height: 100%;
-}
+} */
 
 
 
-/* need to change to gird */
+/* need to change to grid */
 .autofill {
-  border: 1px solid red;
-  padding: 10px;
+  /* border: 1px solid red; */
+  /* padding: 10px; */
+  margin: 10px 0 10px 0;
   /* display: flex;
-  flex-direction: column;
-  width: 100%; */
+  flex-direction: column; */
+  /* min-width: 50%; */
+  min-width: 250px;
+  max-width: 600px;
+  height: 40px;
+  background-color: var(--color-primary);
 }
 
 
 .suggestions {
   position: fixed;
   display: block;
-  max-width: 50%;
+  /* max-width: 60%;
   max-height: 30%;
   top: 10rem;
   left: 1rem;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 1rem; */
+  background-color: #fff;
 }
 
 
-.other-inputs {
-  border: 2px solid yellow;
+
+/* .autofill input[type="text"] { */
+  #address {
+  flex: 2;
+  min-width: 300px;
+  max-width: fit-content;
+  height: 100%;
+  /* border-width: 0 0 1px 0; */
+  /* margin: 0 0.5rem 0 0.5rem; */
   padding: 10px;
-}
-
-.autofill input[type="text"] {
-  min-width: 20rem;
-  max-height: 4rem;
-  border-width: 0 0 1px 0;
-  /* margin: 1rem 2rem 2rem 1rem; */
-  padding: 20px;
   border-radius: 5px;
   background-color: var(--color-primary);
   border-style: none;
@@ -63,26 +72,37 @@
   color: var(--color-light);
   letter-spacing: 2px;
   outline: none;
+  font-size: 0.75rem;
+  
 }
 
 .autofill input[type="text"]:focus {
   background-color: rgba(28, 54, 99, 0.593);
 }
 
-.autofill input[type="text"]::-webkit-input-placeholder {
+.autofill input[type="text"]::-webkit-input-placeholder { 
     color: var(--color-light);
     letter-spacing: 2px;
 }
 
-  
 
-.other-inputs input[type="text"] {
+
+.other-inputs {
+  /* border: 1px solid yellow; */
+  min-width: 20%;
+  height: 40px;
+  background-color: var(--color-primary-variant);
+  margin: 10px 0 10px 0;
+}
+
+/* .other-inputs input[type="text"] { */
+  #unit-house {
+  font-size: 0.75rem;
  flex: 1;
-  padding: 20px;
-  width: 10rem;
-  max-height: 4rem;
-  border-width: 0 0 1px 0;
-  /* margin: 1rem 2rem 2rem 1rem; */
+ padding: 10px;
+  height: 100%;
+  max-width: 100px;
+  /* border-width: 0 0 1px 0; */
   border-radius: 5px;
   background-color: var(--color-primary-variant);
   border-style: none;
@@ -90,6 +110,7 @@
   letter-spacing: 2px;
   color: var(--color-light);
   outline: none;
+  
 }
 
 .other-inputs input[type="text"]::-webkit-input-placeholder {
@@ -111,16 +132,23 @@
   /* border-radius: 50%; */
   /* display: flex; */
   color: var(--color-primary);
-  font-size: 3rem;
+  font-size: 2rem;
   cursor: pointer;
   flex-direction: row;
-  height: 5rem;
-  width: 5rem;
+  /* max-height: 4rem;
+  max-width: 1.5em; */
   /* margin-left: 0.5rem; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  max-height: 40px;
+  max-width: 40px;
+  margin: 5px;
 }
 
 .search-btn-icon :hover {
+  cursor: pointer;
+}
+
+.clear-btn :hover {
   cursor: pointer;
 }
 
@@ -132,13 +160,13 @@
   /* margin: 1rem 2rem 2rem 1rem; */
   /* border-radius: 50%; */
   color: var(--color-primary);
-  font-size: 3rem;
+  font-size: 2rem;
   cursor: pointer;
   flex-direction: row;
-  height: 5rem;
-  width: 5rem;
-  /* margin-bottom: 0.7rem; */
-  border: 1px solid black;
+  max-height: 40px;
+  max-width: 40px;
+  margin-bottom: 5px;
+  /* border: 1px solid black; */
  
 }
 
@@ -147,21 +175,22 @@
   /*  */
   /* .search-btn {
     order: -1;
-  }
-  .clear-btn {
-    order: -2;
   } */
+  /* .clear-btn {
+    order: -2;
+  }  */
 }
 
 /* Media queries (phones) */
 @media screen and (max-width: 600px) {
   /*  */
   /* .search-btn {
-    order: -1;
     margin-left: auto;
-  }
+  } */
   .clear-btn {
     order: -2;
-  } */
-
+  } 
+  .search-container {
+    padding: 0 10px 0 0;
+  }
 }
