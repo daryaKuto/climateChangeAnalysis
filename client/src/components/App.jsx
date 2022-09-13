@@ -32,8 +32,27 @@ const App = () => {
     streetAddress: "",
     zipCode: "",
     zpid: "",
+    zestimate: "",
+    livingAreaSqft: "",
+    price: "",
+    bathrooms: "",
+    bedrooms: "",
+    year: "",
+    type: "",
+    taxRate: "",
   });
+
   const [zpid, setZpid] = useState("");
+
+  //will re-render the component when searchbar is cleared
+  const [rerender, setRerender] = useState(false);
+
+  // useEffect(() => {
+    // This effect uses the `value` variable,
+    // so it "depends on" `value`.
+  
+  // }, [rerender])  // pass `value` as a dependency
+
 
   const searchZpid = (addressInput) => {
     axios
@@ -66,6 +85,7 @@ const App = () => {
         console.error(error);
       });
   };
+
   const getPropertyData = (propertyZpid) => {
     axios
       .get("/getproperty", { params: { zpid: `${propertyZpid}` } })
@@ -78,7 +98,15 @@ const App = () => {
         streetAddress: `${resultProperty.address.streetAddress}`,
         zipCode: `${resultProperty.address.zipcode}`,
         zpid: `${zpid}`,
-       })
+        zestimate: `${resultProperty.zestimate}`,
+        livingAreaSqft: `${resultProperty.livingArea}`,
+        price: `${resultProperty.price}`,
+        bathrooms: `${resultProperty.bathrooms}`,
+        bedrooms: `${resultProperty.bedrooms}`,
+        year: `${resultProperty.yearBuilt}`,
+        type: `${resultProperty.homeType}`,
+        taxRate: `${resultProperty.propertyTaxRate}`,
+       });
       })
       .catch(function (error) {
         console.error(error);
@@ -101,7 +129,7 @@ const App = () => {
           large_fires: `${results.large_fires}`,
           economic_damage: `${results.economic_damage}`,
         });
-        // showModal(true);
+        showModal(true);
       })
       .catch(function (error) {
         console.log(error);
@@ -109,7 +137,6 @@ const App = () => {
   };
 
   return (
-    //flex rows
     <div className="main">
       <Header />
       <Nav />
@@ -120,8 +147,11 @@ const App = () => {
         searchZpid={searchZpid}
         isLoading={isLoading}
         setLoading={setLoading}
+        rerender ={rerender}
+        setRerender ={setRerender}
       />
-      {searched ?<Modal isLoading={isLoading} results={results} property={property} images = {images} /> : null}
+      {/* uncomment line below and loader in modal */}
+      {searched ? <Modal setLoading={setLoading} rerender ={rerender} setRerender ={setRerender} isLoading={isLoading} results={results} property={property} images = {images} /> : null}
       {/* <Modal isLoading={isLoading} results={results} property={property} images = {images} /> */}
       {/* <Images images={images} /> */}
       <About />

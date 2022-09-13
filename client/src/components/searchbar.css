@@ -8,12 +8,13 @@
   margin: 1rem 2rem 2rem 1rem; 
   grid-template-columns: 1fr 1fr; */
   display: flex;
-  border: 1px solid blue;
+  border: 2px solid var(--color-primary);
   flex-wrap: nowrap;
   background-color: var(--color-light);
   align-items: center;
-  max-width: fit-content;
+  max-width: 700px;
   min-width: 460px;
+  border-radius: 7px;
 }
 
 /* 
@@ -36,7 +37,7 @@
   flex-direction: column; */
   /* min-width: 50%; */
   min-width: 250px;
-  max-width: 600px;
+  width: 700px;
   height: 40px;
   background-color: var(--color-primary);
 }

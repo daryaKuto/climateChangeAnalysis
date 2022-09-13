@@ -63,9 +63,14 @@ body {
   max-width: 1200px;
   grid-column: 1/-1;
 }
+.results {
+  max-width: 1200px;
+  grid-column: 1/-1;
+}
 
 .footer_container {
   grid-column: 1/-1;
+  max-width: 1200px;
 }
 
 /* Media queries (tablets) */
@@ -78,10 +83,10 @@ body {
     margin-top: 4rem;
   }
   .modal {
-    max-width: 900px;
+    max-width: 800px;
   }
   .footer_container {
-    max-height: 80%;
+    max-height: 70%;
   }
 }
 
@@ -95,10 +100,10 @@ body {
     margin-bottom: 2rem;
   }
   .modal {
-    max-width: 550px;
+    max-width: 600px;
   }
   .footer_container {
-    max-height: 70%;
+    max-height: 60%;
   }
 }
 

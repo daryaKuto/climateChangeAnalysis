@@ -1,11 +1,11 @@
 .outer-carousel {
   display: flex;
   flex-direction: row;
-  width: 85%;
+  width: 100%;
   margin: 1em 1em auto;
   margin: 20px;
   justify-content: normal;
-  height: 90%;
+  height: 100%;
 }
 .image-container {
   color: var(--color-font);

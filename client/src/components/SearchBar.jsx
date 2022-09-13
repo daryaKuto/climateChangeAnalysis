@@ -16,6 +16,8 @@ const SearchBar = ({
   searchZpid,
   isLoading,
   setLoading,
+  rerender,
+  setRerender,
 }) => {
   //prev version
   const [fullAddress, setFullAddress] = useState({
@@ -27,13 +29,6 @@ const SearchBar = ({
   //suggestions 
   const [suggested, setSuggestion] = useState(true);
 
-  //refresh page after the fields are cleared
-//   const [rerender, setRerender] = useState(false);
-
-
-// useEffect(()=>{
-//   setSuggestion(true);
-// }, [address]); 
 
   //autofill
   const [street, setStreet] = useState("");
@@ -46,6 +41,7 @@ const SearchBar = ({
   setUnit('');
   setStreet('');
   setSuggestion(true);
+  setRerender(true);
  }
 
  
@@ -86,9 +82,10 @@ const SearchBar = ({
     var addressAsString = `${fullAddress.address},${fullAddress.citystate} ${fullAddress.zipcode} `;
     // e.preventDefault();
     console.log(addressAsString);
+    //enables loading screen
     searchByZip(fullAddress.zipcode);
     searchZpid(addressAsString);
-    showModal(true);
+    // showModal(true);
   };
 
   return (
