@@ -6,7 +6,7 @@ import Image from './Image.jsx'
 
 
 const Images = ({ images }) => {
-  //const [image, setImage] = useState("");
+  const [image, setImage] = useState("");
   const [noImage, setReplacement] = useState(
     "https://www.budget101.com/images/image-not-available.png?14867"
   );
@@ -18,8 +18,14 @@ const Images = ({ images }) => {
   const scrollLeftCarousel = () => {
     document.querySelector('#carousel').scrollLeft += -200;
   };
-
-
+ 
+  if (images.length === 1) {
+    return (
+      <div className = 'image-container'>
+      <Image  image = {noImage}  key = {images.indexOf(image)}/>
+    </div>
+    )
+  }
   return (
     <div className = 'outer-carousel'>
       <BsArrowLeftCircle className="arrowLeft" onClick={scrollLeftCarousel} />

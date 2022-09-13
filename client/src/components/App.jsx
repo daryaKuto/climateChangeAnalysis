@@ -8,7 +8,6 @@ import Footer from "./Footer.jsx";
 import Nav from "./Nav.jsx";
 import About from "./About.jsx";
 
-
 const App = () => {
   //useState for display of information from api call
   const [searched, showModal] = useState(false);
@@ -48,11 +47,10 @@ const App = () => {
   const [rerender, setRerender] = useState(false);
 
   // useEffect(() => {
-    // This effect uses the `value` variable,
-    // so it "depends on" `value`.
-  
-  // }, [rerender])  // pass `value` as a dependency
+  // This effect uses the `value` variable,
+  // so it "depends on" `value`.
 
+  // }, [rerender])  // pass `value` as a dependency
 
   const searchZpid = (addressInput) => {
     axios
@@ -70,7 +68,6 @@ const App = () => {
       .catch(function (error) {
         console.error(error);
       });
-    
   };
 
   const getPropertyImages = (zpid) => {
@@ -93,20 +90,20 @@ const App = () => {
         console.log(res.data);
         var resultProperty = res.data;
         setProperty({
-        state: `${resultProperty.address.state}`,
-        city: `${resultProperty.address.city}`,
-        streetAddress: `${resultProperty.address.streetAddress}`,
-        zipCode: `${resultProperty.address.zipcode}`,
-        zpid: `${zpid}`,
-        zestimate: `${resultProperty.zestimate}`,
-        livingAreaSqft: `${resultProperty.livingArea}`,
-        price: `${resultProperty.price}`,
-        bathrooms: `${resultProperty.bathrooms}`,
-        bedrooms: `${resultProperty.bedrooms}`,
-        year: `${resultProperty.yearBuilt}`,
-        type: `${resultProperty.homeType}`,
-        taxRate: `${resultProperty.propertyTaxRate}`,
-       });
+          state: `${resultProperty.address.state}`,
+          city: `${resultProperty.address.city}`,
+          streetAddress: `${resultProperty.address.streetAddress}`,
+          zipCode: `${resultProperty.address.zipcode}`,
+          zpid: `${zpid}`,
+          zestimate: `${resultProperty.zestimate}`,
+          livingAreaSqft: `${resultProperty.livingArea}`,
+          price: `${resultProperty.price}`,
+          bathrooms: `${resultProperty.bathrooms}`,
+          bedrooms: `${resultProperty.bedrooms}`,
+          year: `${resultProperty.yearBuilt}`,
+          type: `${resultProperty.homeType}`,
+          taxRate: `${resultProperty.propertyTaxRate}`,
+        });
       })
       .catch(function (error) {
         console.error(error);
@@ -143,16 +140,45 @@ const App = () => {
       <SearchBar
         searchByZip={searchByZip}
         showModal={showModal}
-        searched={searched}
         searchZpid={searchZpid}
         isLoading={isLoading}
         setLoading={setLoading}
-        rerender ={rerender}
-        setRerender ={setRerender}
+        rerender={rerender}
+        setRerender={setRerender}
+        searched={searched}
+        results={results}
+        property={property}
+        images={images}
       />
       {/* uncomment line below and loader in modal */}
-      {searched ? <Modal setLoading={setLoading} rerender ={rerender} setRerender ={setRerender} isLoading={isLoading} results={results} property={property} images = {images} /> : null}
-      {/* <Modal isLoading={isLoading} results={results} property={property} images = {images} /> */}
+      {/* {searched ? (
+        <Modal
+          searchByZip={searchByZip}
+          showModal={showModal}
+          searched={searched}
+          searchZpid={searchZpid}
+          setLoading={setLoading}
+          rerender={rerender}
+          setRerender={setRerender}
+          isLoading={isLoading}
+          results={results}
+          property={property}
+          images={images}
+        />
+      ) : null} */}
+      {/* <Modal
+          searchByZip={searchByZip}
+          showModal={showModal}
+          searched={searched}
+          searchZpid={searchZpid}
+          setLoading={setLoading}
+          rerender={rerender}
+          setRerender={setRerender}
+          isLoading={isLoading}
+          results={results}
+          property={property}
+          images={images}
+        /> */}
       {/* <Images images={images} /> */}
       <About />
       <Footer />

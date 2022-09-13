@@ -8,16 +8,21 @@ import {
   getLatLng,
 } from "react-places-autocomplete";
 import searchbar from "./searchbar.css";
+import modalCSS from "./modal.css";
+import Modal from "./Modal.jsx";
 
 const SearchBar = ({
   searchByZip,
   showModal,
   searched,
   searchZpid,
-  isLoading,
   setLoading,
   rerender,
   setRerender,
+  results,
+  property,
+  isLoading,
+  images,
 }) => {
   //prev version
   const [fullAddress, setFullAddress] = useState({
@@ -35,13 +40,22 @@ const SearchBar = ({
   const [unit, setUnit] = useState("");
  const [address, setAddress] = useState("")
 
+// comment out when troubleshooting
+useEffect(() => {
+  showModal(false)
+}, [rerender]);
+
+
+
+
  //clear the fields 
  const clearInputFields = () => {
   setAddress('');
   setUnit('');
   setStreet('');
   setSuggestion(true);
-  setRerender(true);
+  setRerender(!rerender);
+  setLoading(!isLoading);
  }
 
  
@@ -80,7 +94,6 @@ const SearchBar = ({
   const handleSearch = () => {
     fullAddress.address = `${street} ${unit}`;
     var addressAsString = `${fullAddress.address},${fullAddress.citystate} ${fullAddress.zipcode} `;
-    // e.preventDefault();
     console.log(addressAsString);
     //enables loading screen
     searchByZip(fullAddress.zipcode);
@@ -89,6 +102,7 @@ const SearchBar = ({
   };
 
   return (
+    <div>
     <div className="search-container">
        <div className="search-btn" value="Search"
             onClick={() => {
@@ -151,7 +165,22 @@ const SearchBar = ({
         <div className="clear-btn" onClick={() => {clearInputFields()}}>
         <MdOutlineClear className="clear-btn-icon" />
         </div>
-        
+    </div>
+    {searched ? (
+        <Modal
+          searchByZip={searchByZip}
+          showModal={showModal}
+          searched={searched}
+          searchZpid={searchZpid}
+          setLoading={setLoading}
+          rerender={rerender}
+          setRerender={setRerender}
+          isLoading={isLoading}
+          results={results}
+          property={property}
+          images={images}
+        />
+      ) : null}
     </div>
   );
 };
