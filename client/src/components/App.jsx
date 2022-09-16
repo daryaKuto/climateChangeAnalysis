@@ -39,8 +39,22 @@ const App = () => {
     year: "",
     type: "",
     taxRate: "",
+    hoinsurance: "",
+    desc: "",
   });
 
+  //tax history
+  const [taxHist, setTaxHist] = useState([]);
+  //price history
+  const [priceHist, setPriceHist] = useState([]);
+  //near by Homes
+  const [nearByHomes, setNearByHomes] = useState([])
+  //near by schools
+  const [nearBySchools, setNearBySchools] = useState([])
+  //resofacts (facts and features of interior)
+  const [resoFacts, setResoFacts] = useState({})
+
+  //zillow id
   const [zpid, setZpid] = useState("");
 
   //will re-render the component when searchbar is cleared
@@ -83,6 +97,9 @@ const App = () => {
       });
   };
 
+
+  //pass down to the stats to be able to reload with new address
+  //add useEffect to reload upon change of zpid or address
   const getPropertyData = (propertyZpid) => {
     axios
       .get("/getproperty", { params: { zpid: `${propertyZpid}` } })
@@ -94,7 +111,7 @@ const App = () => {
           city: `${resultProperty.address.city}`,
           streetAddress: `${resultProperty.address.streetAddress}`,
           zipCode: `${resultProperty.address.zipcode}`,
-          zpid: `${zpid}`,
+          zpid: `${resultProperty.zpid}`,
           zestimate: `${resultProperty.zestimate}`,
           livingAreaSqft: `${resultProperty.livingArea}`,
           price: `${resultProperty.price}`,
@@ -103,7 +120,18 @@ const App = () => {
           year: `${resultProperty.yearBuilt}`,
           type: `${resultProperty.homeType}`,
           taxRate: `${resultProperty.propertyTaxRate}`,
+          hoinsurance: `${resultProperty.annualHomeownersInsurance}`,
+          desc: `${resultProperty.description}`,
         });
+        setTaxHist(resultProperty.taxHistory);
+        if (Array.isArray(resultProperty.priceHistory)) {
+          setPriceHist(resultProperty.priceHistory);
+        } else {
+          setPriceHist(["None Provided"]) 
+        }
+        setNearByHomes(resultProperty.nearbyHomes);
+        setNearBySchools(resultProperty.schools);
+        setResoFacts(resultProperty.resoFacts);
       })
       .catch(function (error) {
         console.error(error);
@@ -149,6 +177,11 @@ const App = () => {
         results={results}
         property={property}
         images={images}
+        taxHist = {taxHist}
+        priceHist ={priceHist}
+        nearByHomes = {nearByHomes}
+        nearBySchools = {nearBySchools}
+        resoFacts = {resoFacts}
       />
       {/* uncomment line below and loader in modal */}
       {/* {searched ? (

@@ -23,6 +23,11 @@ const SearchBar = ({
   property,
   isLoading,
   images,
+  taxHist ,
+  priceHist ,
+  nearByHomes ,
+  nearBySchools,
+  resoFacts,
 }) => {
   //prev version
   const [fullAddress, setFullAddress] = useState({
@@ -39,6 +44,12 @@ const SearchBar = ({
   const [street, setStreet] = useState("");
   const [unit, setUnit] = useState("");
  const [address, setAddress] = useState("")
+
+
+//useEffect for rerender
+// useEffect(() => {
+//   setLoading(false);
+// }, []);
 
 // comment out when troubleshooting
 useEffect(() => {
@@ -102,8 +113,8 @@ useEffect(() => {
   };
 
   return (
-    <div>
-    <div className="search-container">
+    <div className ="wrapper">
+    <section id= "search" className="search-container">
        <div className="search-btn" value="Search"
             onClick={() => {
               handleSearch()}}>
@@ -165,7 +176,8 @@ useEffect(() => {
         <div className="clear-btn" onClick={() => {clearInputFields()}}>
         <MdOutlineClear className="clear-btn-icon" />
         </div>
-    </div>
+    </section>
+    <section id = "report">
     {searched ? (
         <Modal
           searchByZip={searchByZip}
@@ -179,8 +191,15 @@ useEffect(() => {
           results={results}
           property={property}
           images={images}
+          taxHist = {taxHist}
+          priceHist ={priceHist}
+          nearByHomes = {nearByHomes}
+          nearBySchools = {nearBySchools}
+          resoFacts = {resoFacts}
+          setFullAddress ={setFullAddress}
         />
       ) : null}
+    </section>
     </div>
   );
 };
