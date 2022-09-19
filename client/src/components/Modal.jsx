@@ -24,9 +24,9 @@ import Stats from "./Stats.jsx";
 //title and intro text
 const Modal = ({
   searchByZip,
+  searchZpid,
   showModal,
   searched,
-  searchZpid,
   setLoading,
   rerender,
   setRerender,
@@ -35,11 +35,17 @@ const Modal = ({
   isLoading,
   images,
   setFullAddress,
-  taxHist ,
-  priceHist ,
-  nearByHomes ,
+  taxHist,
+  priceHist,
+  nearByHomes,
   nearBySchools,
   resoFacts,
+  setNeighborFlag,
+  handleSearch,
+  clearInputFields,
+  fullAddress,
+  setUnit ,
+          setStreet ,
 }) => {
   if (isLoading) {
     return (
@@ -90,13 +96,21 @@ const Modal = ({
           <Images images={images} />
           <Stats
             property={property}
-            taxHist = {taxHist}
-            priceHist ={priceHist}
-            nearByHomes = {nearByHomes}
-            nearBySchools = {nearBySchools}
-            resoFacts = {resoFacts}
-            setFullAddress ={setFullAddress}
+            taxHist={taxHist}
+            priceHist={priceHist}
+            nearByHomes={nearByHomes}
+            nearBySchools={nearBySchools}
+            resoFacts={resoFacts}
+            setFullAddress={setFullAddress}
             setRerender={setRerender}
+            setNeighborFlag ={setNeighborFlag}
+            handleSearch = {handleSearch}
+            clearInputFields = {clearInputFields}
+            fullAddress = {fullAddress}
+            setUnit = {setUnit}
+            setStreet = {setStreet}
+            searchByZip={searchByZip}
+          searchZpid={searchZpid}
           />
         </div>
       </div>

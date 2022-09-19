@@ -48,11 +48,11 @@ const App = () => {
   //price history
   const [priceHist, setPriceHist] = useState([]);
   //near by Homes
-  const [nearByHomes, setNearByHomes] = useState([])
+  const [nearByHomes, setNearByHomes] = useState([]);
   //near by schools
-  const [nearBySchools, setNearBySchools] = useState([])
+  const [nearBySchools, setNearBySchools] = useState([]);
   //resofacts (facts and features of interior)
-  const [resoFacts, setResoFacts] = useState({})
+  const [resoFacts, setResoFacts] = useState({});
 
   //zillow id
   const [zpid, setZpid] = useState("");
@@ -61,16 +61,17 @@ const App = () => {
   const [rerender, setRerender] = useState(false);
 
   // useEffect(() => {
-  // This effect uses the `value` variable,
-  // so it "depends on" `value`.
+  // // This effect uses the `value` variable,
+  // // so it "depends on" `value`.
 
-  // }, [rerender])  // pass `value` as a dependency
+  // }, [zpid])  // pass `value` as a dependency
 
   const searchZpid = (addressInput) => {
     axios
       .get("/zpid", { params: { searchString: `${addressInput}` } })
       .then((res) => {
         console.log(res.data);
+        //need to set up flag for multiple address
         var propertyZpid = res.data.zpid;
         setZpid(propertyZpid);
         getPropertyData(propertyZpid);
@@ -97,7 +98,6 @@ const App = () => {
       });
   };
 
-
   //pass down to the stats to be able to reload with new address
   //add useEffect to reload upon change of zpid or address
   const getPropertyData = (propertyZpid) => {
@@ -106,31 +106,77 @@ const App = () => {
       .then((res) => {
         console.log(res.data);
         var resultProperty = res.data;
+        //   "Not Listed"
         setProperty({
-          state: `${resultProperty.address.state}`,
-          city: `${resultProperty.address.city}`,
-          streetAddress: `${resultProperty.address.streetAddress}`,
-          zipCode: `${resultProperty.address.zipcode}`,
-          zpid: `${resultProperty.zpid}`,
-          zestimate: `${resultProperty.zestimate}`,
-          livingAreaSqft: `${resultProperty.livingArea}`,
-          price: `${resultProperty.price}`,
-          bathrooms: `${resultProperty.bathrooms}`,
-          bedrooms: `${resultProperty.bedrooms}`,
-          year: `${resultProperty.yearBuilt}`,
-          type: `${resultProperty.homeType}`,
-          taxRate: `${resultProperty.propertyTaxRate}`,
-          hoinsurance: `${resultProperty.annualHomeownersInsurance}`,
-          desc: `${resultProperty.description}`,
+          state: `${
+            resultProperty.address.state
+              ? resultProperty.address.state
+              : "Not Provided"
+          }`,
+          city: `${
+            resultProperty.address.city
+              ? resultProperty.address.city
+              : "Not Provided"
+          }`,
+          streetAddress: `${
+            resultProperty.address.streetAddress
+              ? resultProperty.address.streetAddress
+              : "Not Provided"
+          }`,
+          zipCode: `${
+            resultProperty.address.zipcode
+              ? resultProperty.address.zipcode
+              : "Not Provided"
+          }`,
+          zpid: `${resultProperty.zpid ? resultProperty.zpid : "Not Provided"}`,
+          zestimate: `${
+            resultProperty.zestimate ? resultProperty.zestimate : "Not Provided"
+          }`,
+          livingAreaSqft: `${
+            resultProperty.livingArea
+              ? resultProperty.livingArea
+              : "Not Provided"
+          }`,
+          price: `${
+            resultProperty.price ? resultProperty.price : "Not Provided"
+          }`,
+          bathrooms: `${
+            resultProperty.bathrooms ? resultProperty.bathrooms : "Not Provided"
+          }`,
+          bedrooms: `${
+            resultProperty.bedrooms ? resultProperty.bedrooms : "Not Provided"
+          }`,
+          year: `${
+            resultProperty.yearBuilt ? resultProperty.yearBuilt : "Not Provided"
+          }`,
+          type: `${
+            resultProperty.homeType ? resultProperty.homeType : "Not Provided"
+          }`,
+          taxRate: `${
+            resultProperty.propertyTaxRate
+              ? resultProperty.propertyTaxRate
+              : "Not Provided"
+          }`,
+          hoinsurance: `${
+            resultProperty.annualHomeownersInsurance
+              ? resultProperty.annualHomeownersInsurance
+              : "Not Provided"
+          }`,
+          desc: `${
+            resultProperty.description
+              ? resultProperty.description
+              : "Not Provided"
+          }`,
         });
+
         setTaxHist(resultProperty.taxHistory);
-        if (Array.isArray(resultProperty.priceHistory)) {
-          setPriceHist(resultProperty.priceHistory);
-        } else {
-          setPriceHist(["None Provided"]) 
-        }
+
+        setPriceHist(resultProperty.priceHistory);
+
         setNearByHomes(resultProperty.nearbyHomes);
+
         setNearBySchools(resultProperty.schools);
+
         setResoFacts(resultProperty.resoFacts);
       })
       .catch(function (error) {
@@ -177,11 +223,13 @@ const App = () => {
         results={results}
         property={property}
         images={images}
-        taxHist = {taxHist}
-        priceHist ={priceHist}
-        nearByHomes = {nearByHomes}
-        nearBySchools = {nearBySchools}
-        resoFacts = {resoFacts}
+        taxHist={taxHist}
+        priceHist={priceHist}
+        nearByHomes={nearByHomes}
+        nearBySchools={nearBySchools}
+        resoFacts={resoFacts}
+        zpid = {zpid}
+        setZpid = {setZpid}
       />
       {/* uncomment line below and loader in modal */}
       {/* {searched ? (

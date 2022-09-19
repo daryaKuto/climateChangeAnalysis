@@ -37,13 +37,66 @@ const Stats = ({
   resoFacts,
   setRerender,
   setFullAddress,
+  newAddress,
+  setNewAddress,
+  setZpid,
+  zpid,
+  setNeighborFlag,
+  handleSearch,
+  clearInputFields,
+  fullAddress,
+  searchByZip,
+  searchZpid,
 }) => {
-    console.log(property);
+  console.log(property);
+  const [floor, setFloor] = useState([]);
+  const [appliances, setAppliances] = useState([]);
+  const [parking, setParking] = useState([]);
+  const [heating, setHeat] = useState([]);
+
+   //if no data provided
+   const [noData, setNoData] = useState(["Not Provided"]);
+
+  //check for flooring, appliances, parking, heating
+  //check if resoFacts exist and if appliances, parking, flooring
+  // heating are arrays with length greater or equal to 1
+  // if (Array.isArray(resoFacts.appliances) && resoFacts.appliances.length >= 1) {
+  //   setAppliances(resoFacts.appliances);
+  // } 
+  // if (Array.isArray(resoFacts.flooring) && resoFacts.flooring.length >= 1) {
+  //   setFloor(resoFacts.flooring);
+  // } 
+
+  // if (Array.isArray(resoFacts.heating) && resoFacts.heating.length >= 1) {
+  //   setHeat(resoFacts.heating);
+  // } 
+
+  // if (Array.isArray(resoFacts.parkingFeatures) && resoFacts.parkingFeatures.length >= 1) {
+  //   setParking(resoFacts.parkingFeatures);
+  // } 
+const changeHouse = (address) => {
+  clearInputFields();
+  console.log(address)
+  // setFullAddress({
+  //   address: `${address.streetAddress}`,
+  //   citystate: `${address.city}, ${address.state}`,
+  //   zipcode: `${address.zipcode}`
+  // })
+  // console.log(fullAddress)
+  let addressAsString = `${address.streetAddress},${address.city} ${address.state} ${address.zipcode} `;
+    console.log(addressAsString);
+    searchByZip(address.zipcode);
+    searchZpid(addressAsString);
+  
+}
+
   return (
     <div className="stats_wrapper">
       <h2>Tax History</h2>
       <div className="tax_history">
+      {taxHist.length >= 1 ? (
         <div className="tax_heading">
+          {/* Need conditional if Tax  history is greater than one entry */}
           <div className="tax_stats">
             <BsCalendar2Check className="logo" />
             <p>Date</p>
@@ -63,15 +116,18 @@ const Stats = ({
           <div className="tax_stats">
             <AiOutlineDollarCircle className="logo" />
             <p>Worth value</p>
-          </div>
-        </div>
-        {taxHist.map((taxYear) => {
-          //console.log(taxYear);
+          </div> 
+          </div> )
+          : 
+           (<div>
+           Tax history was not provided</div>) }
+        {(Array.isArray(taxHist) &&
+        taxHist.length >= 1) ? taxHist.map((taxYear) => {
           var humanDate = new Date(taxYear.time);
           return (
             <div className="tax_year">
               <p className="tax_stats">{humanDate.toGMTString()}</p>
-              <p className="tax_stats">{taxYear.taxPaid || "Not Listed"}</p>
+              <p className="tax_stats">{taxYear.taxPaid || "Not Provided"}</p>
               <p className="tax_stats">
                 {(taxYear.taxIncreaseRate * 100).toFixed(1)}%
               </p>
@@ -81,15 +137,12 @@ const Stats = ({
               <p className="tax_stats">{taxYear.value}</p>
             </div>
           );
-        })}
+        }): null}
       </div>
       <h2>Price History</h2>
       <div className="price_history">
-        {/* {priceHist[0]=== "None Provided" ? 
-        <div>
-            Price History was not provided
-        </div> : null } */}
-        <div className="price_heading">
+        {priceHist.length >= 1 ? (
+          <div className="price_heading">
           <div className="price_stats">
             <BsCalendar2Check className="logo" />
             <p>Date</p>
@@ -107,8 +160,10 @@ const Stats = ({
             <p>Price Per Square Foot</p>
           </div>
         </div>
-        {/* only display if "sold" or "listed for sale" */}
-        {priceHist.map((priceYear) => {
+        ) : (<div>
+          Price history was not provided</div>) }
+        {(Array.isArray(priceHist) &&
+        priceHist.length >= 1) ? priceHist.map((priceYear) => {
           return (
             <div className="price_year">
               <p className="price_stats">{priceYear.date}</p>
@@ -117,30 +172,51 @@ const Stats = ({
               <p className="price_stats">${priceYear.pricePerSquareFoot}</p>
             </div>
           );
-        })}
+        }) : null}
       </div>
       <h2>Facts and Features</h2>
       <div className="property_stats">
         <div className="zillow_stats">
           <GiWashingMachine className="logo" />
+          {/* resoFacts.appliances.map((item) => {
+                  return <p>{item}</p>;
+                }) */}
           <div>
-            {Array.isArray(resoFacts.appliances) ? 
-            resoFacts.appliances.map((item) => {
-              return <p>{item}</p>;
-            }) : "None"}
+            {(Array.isArray(resoFacts.appliances) && resoFacts.appliances.length >= 1)
+              ? (
+                <div>
+                  <p>{resoFacts.appliances[0]}</p>
+                  <p>{resoFacts.appliances[1] ? resoFacts.appliances[1] : null}</p>
+                </div>
+              )
+              : "Not Provided"}
+            {/* {appliances.map((item) => {
+                  return <p>{item}</p>;
+                })} */}
           </div>
         </div>
         <div className="zillow_stats">
           <BsCashCoin className="logo" />
-          <p>HOA: {resoFacts.hoaFee || "Not Listed"}</p>
+          <p>HOA: {resoFacts.hoaFee || "Not Provided"}</p>
         </div>
         <div className="zillow_stats">
           <RiHome6Line className="logo" />
           <div>
-            Floor Type: 
-            {Array.isArray(resoFacts.flooring) ? resoFacts.flooring.map((floor) => {
-              return <p>{floor}</p>;
-            }) : "None Listed"}
+            {/* resoFacts.flooring.map((floor) => {
+                  return <p>{floor}</p>;
+                }) */}
+            Floor Type:
+            {(Array.isArray(resoFacts.flooring) && resoFacts.flooring.length >= 1)
+              ? (
+                <div>
+                  <p>{resoFacts.flooring[0]}</p>
+                  <p>{resoFacts.flooring[1] ? resoFacts.flooring[1] : null}</p>
+                </div>
+              )
+              : "Not Provided"}
+            {/* {floor.map((floorType) => {
+                  return <p>{floorType}</p>;
+                })} */}
           </div>
         </div>
         <div className="zillow_stats">
@@ -149,23 +225,47 @@ const Stats = ({
         </div>
         <div className="zillow_stats">
           <GiFireplace className="logo" />
+          {/* resoFacts.heating.map((heat) => {
+                  return <p>{heat}</p>;
+                }) */}
           <div>
-            {Array.isArray(resoFacts.heating) ? resoFacts.heating.map((heat) => {
-              return <p>{heat}</p>;
-            }) : "None Listed"}
+            {(Array.isArray(resoFacts.heating) && resoFacts.heating.length >= 1)
+              ? (
+                <div>
+                  <p>{resoFacts.heating[0]}</p>
+                  <p>{resoFacts.heating[1] ? resoFacts.heating[1] : null}</p>
+                </div>
+              )
+              : "Not Provided"} 
+              {/* {heating.map((heat) => {
+                  return <p>{heat}</p>;
+                })} */}
           </div>
         </div>
         <div className="zillow_stats">
           <FaWarehouse className="logo" />
+          {/* resoFacts.parkingFeatures.map((parkSpace) => {
+                  return <p>{parkSpace}</p>;
+                }) */}
           <div>
-            {Array.isArray(resoFacts.parkingFeatures) ? resoFacts.parkingFeatures.map((parkSpace) => {
-              return <p>{parkSpace}</p>;
-            }) : "None Listed"}
+            {(Array.isArray(resoFacts.parkingFeatures) && resoFacts.parkingFeatures.length >= 1)
+              ? (
+                <div>
+                <p>{resoFacts.parkingFeatures[0]}</p>
+                <p>{resoFacts.parkingFeatures[1] ? resoFacts.parkingFeatures[1] : null}</p>
+              </div>
+              )
+              : "Not Provided"}
+              {/* {parking.map((parkSpace) => {
+                  return <p>{parkSpace}</p>;
+                })} */}
           </div>
         </div>
         <div className="zillow_stats">
           <MdHouseboat className="logo" />
-          <p>Home Owners Insurance: {"$" + property.hoinsurance || "Not Listed"}</p>
+          <p>
+            Home Owners Insurance: {"$" + property.hoinsurance || "Not Provided"}
+          </p>
         </div>
         <div className="zillow_stats">
           <AiOutlineHome className="logo" />
@@ -189,60 +289,62 @@ const Stats = ({
         </div>
         <div className="zillow_stats">
           <MdConstruction className="logo" />
-          <p>Year Bult: {property.year || "Not Listed"}</p>
+          <p>Year Bult: {property.year}</p>
         </div>
         <div className="zillow_stats">
           <AiOutlineDollarCircle className="logo" />
-          <p>{"$" + property.price || "Not listed"}</p>
+          <p>{"$" + property.price}</p>
         </div>
         <div className="zillow_stats">
           <MdOutlineOtherHouses className="logo" />
-          <p>Living Area sqft: {property.livingAreaSqft || "Not Listed"}</p>
+          <p>Living Area sqft: {property.livingAreaSqft}</p>
         </div>
         <div className="zillow_stats">
           <BiBed className="logo" />
-          <p>Bedrooms: {property.bedrooms || "Not Listed"}</p>
+          <p>Bedrooms: {property.bedrooms}</p>
         </div>
         <div className="zillow_stats">
           <FaBath className="logo" />
-          <p>Bathrooms: {property.bathrooms || "Not Listed"}</p>
+          <p>Bathrooms: {property.bathrooms}</p>
         </div>
         <div className="zillow_stats">
           <BiBuildingHouse className="logo" />
-          <p>Home Type: {property.type || "Not Listed"}</p>
+          <p>Home Type: {property.type}</p>
         </div>
         <div className="zillow_stats">
           <HiOutlineReceiptTax className="logo" />
-          <p>Tax Rate: {property.taxRate || "Not Listed"}</p>
+          <p>Tax Rate: {property.taxRate}</p>
         </div>
       </div>
       <h2>Near by Homes</h2>
-      <div className="near_by_homes">
+    {(Array.isArray(nearByHomes) &&
+        nearByHomes.length >= 1) ? (<div className="near_by_homes">
+        {/* need array.is array */}
         {nearByHomes.map((house) => {
           return (
             // add on click to reload with that house
-            <div className="neighbor">
-              <p>{house.address.streetAddress}</p>
-              {house.price === 0 ? "Not Provided" :
-               <p>${house.price}</p>
-              }
+            <div className="neighbor" onClick = {(()=> changeHouse(house.address))}>
+              <p >{house.address.streetAddress}</p>
+              {house.price === 0 ? "Not Provided" : <p>${house.price}</p>}
             </div>
           );
         })}
-      </div>
+      </div>)
+          : "Not Provided"}      
       <div className="description">
         <h2>Description</h2>
-        <p>{property.desc}</p>
+        <p>{property.desc || "Not Provided"}</p>
       </div>
       <div className="schools">
         <h2>Near by Schools</h2>
-        {nearBySchools.map((school) => {
+         {(Array.isArray(nearByHomes) &&
+        nearByHomes.length >= 1) ? nearBySchools.map((school) => {
           return (
             <p>
               {school.name} - {school.distance}mi
             </p>
           );
-        })}
+        })  : "Not Provided"} 
       </div>
     </div>
   );

@@ -36,6 +36,13 @@ const SearchBar = ({
     zipcode: "",
   });
 
+  // const [newAddress, setNewAddress] = useState(useState({
+  //   streetAddress: "",
+  //   city: "",
+  //   state: "",
+  //   zipcode: "",
+  // }));
+
   //suggestions 
   const [suggested, setSuggestion] = useState(true);
 
@@ -43,21 +50,35 @@ const SearchBar = ({
   //autofill
   const [street, setStreet] = useState("");
   const [unit, setUnit] = useState("");
- const [address, setAddress] = useState("")
+ const [address, setAddress] = useState("");
 
+ //flag when new address is clicked on
+ const [neighborFlag, setNeighborFlag] = useState(false)
 
-//useEffect for rerender
+//useEffect for rerender with new address
+//need to pass down changeAdress function down to Stats., upon trigger, will
+//re render with new address
 // useEffect(() => {
 //   setLoading(false);
-// }, []);
+// }, [address]);
+
+
+
 
 // comment out when troubleshooting
 useEffect(() => {
   showModal(false)
-}, [rerender]);
+  console.log(property)
+}, [rerender || neighborFlag]);
 
 
 
+// useEffect(() => {
+//   //set full address with the
+//   //setLoading(true);
+//   showModal(false)
+//   handleSearch()
+// }, [neighborFlag])
 
  //clear the fields 
  const clearInputFields = () => {
@@ -106,7 +127,6 @@ useEffect(() => {
     fullAddress.address = `${street} ${unit}`;
     var addressAsString = `${fullAddress.address},${fullAddress.citystate} ${fullAddress.zipcode} `;
     console.log(addressAsString);
-    //enables loading screen
     searchByZip(fullAddress.zipcode);
     searchZpid(addressAsString);
     // showModal(true);
@@ -117,7 +137,7 @@ useEffect(() => {
     <section id= "search" className="search-container">
        <div className="search-btn" value="Search"
             onClick={() => {
-              handleSearch()}}>
+              handleSearch(fullAddress)}}>
           <FaSearchLocation className="clear-btn-icon" />
         </div>
         <PlacesAutocomplete className = "autocomplete-suggestions"
@@ -181,9 +201,9 @@ useEffect(() => {
     {searched ? (
         <Modal
           searchByZip={searchByZip}
+          searchZpid={searchZpid}
           showModal={showModal}
           searched={searched}
-          searchZpid={searchZpid}
           setLoading={setLoading}
           rerender={rerender}
           setRerender={setRerender}
@@ -197,6 +217,12 @@ useEffect(() => {
           nearBySchools = {nearBySchools}
           resoFacts = {resoFacts}
           setFullAddress ={setFullAddress}
+          fullAddress = {fullAddress}
+          setNeighborFlag ={setNeighborFlag}
+          handleSearch = {handleSearch}
+          clearInputFields = {clearInputFields}
+          setUnit = {setUnit}
+          setStreet = {setStreet}
         />
       ) : null}
     </section>
@@ -207,36 +233,3 @@ useEffect(() => {
 export default SearchBar;
 
 
-{/* 
-      PREV VERSION <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          searchByZip(zipcode);
-        }}
-      >
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={fullAddress.address}
-          onChange={addressValueChange}
-          placeholder="Enter your street address and house"
-        />
-        <input
-          type="text"
-          id="citystate"
-          name="citystate"
-          value={fullAddress.citystate}
-          onChange={addressValueChange}
-          placeholder="Enter your city and state separated by a comma"
-        />
-        <input
-          type="text"
-          id="zipcode"
-          name="zipcode"
-          value={fullAddress.zipcode}
-          onChange={addressValueChange}
-          placeholder="Enter you zipcode"
-        />
-        <input type="submit" value="Search" onClick={handleOnSubmit} />
-      </form> */}
