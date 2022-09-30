@@ -68,7 +68,7 @@ const SearchBar = ({
 // comment out when troubleshooting
 useEffect(() => {
   showModal(false)
-  console.log(property)
+  //console.log(property)
 }, [rerender || neighborFlag]);
 
 

@@ -70,8 +70,9 @@ const App = () => {
     axios
       .get("/zpid", { params: { searchString: `${addressInput}` } })
       .then((res) => {
+        //if res.data is an array -> it has multiple zpids listed unde that address
         console.log(res.data);
-        //need to set up flag for multiple address
+        //need to set up flag for multiple address, call getPropertyData on each to get addresses
         var propertyZpid = res.data.zpid;
         setZpid(propertyZpid);
         getPropertyData(propertyZpid);
