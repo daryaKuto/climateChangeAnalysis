@@ -61,7 +61,7 @@ app.get("/zpid", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
+     console.log(response.data);
       res.status(200).send(response.data);
     })
     .catch(function (error) {
@@ -86,7 +86,7 @@ app.get("/getproperty", (req, res) => {
     .request(options)
     .then(function (response) {
       //print all property info
-      //console.log(response.data);
+      console.log(response.data);
       var propertyData = response.data;
       res.status(200).send(propertyData);
     })

@@ -7,6 +7,7 @@ import Modal from "./Modal.jsx";
 import Footer from "./Footer.jsx";
 import Nav from "./Nav.jsx";
 import About from "./About.jsx";
+import Multi from "./Multi.jsx";
 
 const App = () => {
   //useState for display of information from api call
@@ -60,29 +61,42 @@ const App = () => {
   //will re-render the component when searchbar is cleared
   const [rerender, setRerender] = useState(false);
 
-  // useEffect(() => {
-  // // This effect uses the `value` variable,
-  // // so it "depends on" `value`.
+  //flag if multiple listings under the same address
+  const [multi, setMulti] = useState(false)
+  const [properties, setProperties] = useState([]);
 
-  // }, [zpid])  // pass `value` as a dependency
+  
+
+  //check for error input 
+  const [addressError, setError] = useState(false)
 
   const searchZpid = (addressInput) => {
     axios
       .get("/zpid", { params: { searchString: `${addressInput}` } })
       .then((res) => {
-        //if res.data is an array -> it has multiple zpids listed unde that address
-        console.log(res.data);
+        // for multiple listings under one address use: 184 7th St,San Francisco CA 94103 
+        if (Array.isArray(res.data)) {
+          console.log(res.data);
+          showModal(false)
+          setMulti(true)
+          setProperties(res.data)
+        } else if (Object.keys(res.data).length === 0) {
+          showModal(false)
+          console.log(res.data);
+          //show error on input
+          setError(true);
+        } else {
+          var propertyZpid = res.data.zpid;
+          setZpid(propertyZpid);
+          getPropertyData(propertyZpid);
+        }
+        //console.log(res.data);
         //need to set up flag for multiple address, call getPropertyData on each to get addresses
-        var propertyZpid = res.data.zpid;
-        setZpid(propertyZpid);
-        getPropertyData(propertyZpid);
-        setTimeout(() => {
-          getPropertyImages(propertyZpid);
-          showModal(true);
-        }, 1000);
+       
       })
       .catch(function (error) {
         console.error(error);
+        setError(true)
       });
   };
 
@@ -96,6 +110,7 @@ const App = () => {
       })
       .catch(function (error) {
         console.error(error);
+        setError(true)
       });
   };
 
@@ -179,6 +194,10 @@ const App = () => {
         setNearBySchools(resultProperty.schools);
 
         setResoFacts(resultProperty.resoFacts);
+        setTimeout(() => {
+          getPropertyImages(propertyZpid);
+          showModal(true);
+        }, 1500);
       })
       .catch(function (error) {
         console.error(error);
@@ -231,37 +250,18 @@ const App = () => {
         resoFacts={resoFacts}
         zpid = {zpid}
         setZpid = {setZpid}
+        multi = {multi}
+        setMulti = {setMulti}
+        properties = {properties}
+        setError = {setError}
+        addressError = {addressError}
+        getPropertyData = {getPropertyData}
       />
+      {addressError ? <div>
+        <h3>Hmm..can't find the address you are looking for, check and try again!</h3>
+      </div> : null}
       {/* uncomment line below and loader in modal */}
-      {/* {searched ? (
-        <Modal
-          searchByZip={searchByZip}
-          showModal={showModal}
-          searched={searched}
-          searchZpid={searchZpid}
-          setLoading={setLoading}
-          rerender={rerender}
-          setRerender={setRerender}
-          isLoading={isLoading}
-          results={results}
-          property={property}
-          images={images}
-        />
-      ) : null} */}
-      {/* <Modal
-          searchByZip={searchByZip}
-          showModal={showModal}
-          searched={searched}
-          searchZpid={searchZpid}
-          setLoading={setLoading}
-          rerender={rerender}
-          setRerender={setRerender}
-          isLoading={isLoading}
-          results={results}
-          property={property}
-          images={images}
-        /> */}
-      {/* <Images images={images} /> */}
+     
       <About />
       <Footer />
     </div>

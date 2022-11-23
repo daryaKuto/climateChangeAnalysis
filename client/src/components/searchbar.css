@@ -12,7 +12,7 @@
   border: 2px solid var(--color-primary);
   margin: 1rem;
   flex-wrap: nowrap;
-  background-color: var(--color-light);
+  background-color: var(--color-bg);
   max-width: 100%;
   min-width: 460px;
   border-radius: 7px;
@@ -70,7 +70,7 @@
   background-color: var(--color-primary);
   border-style: none;
   text-shadow: none;
-  color: var(--color-light);
+  color: var(--color-white);
   letter-spacing: 2px;
   outline: none;
   font-size: 0.75rem;
@@ -82,7 +82,7 @@
 }
 
 .autofill input[type="text"]::-webkit-input-placeholder { 
-    color: var(--color-light);
+    color: var(--color-white);
     letter-spacing: 2px;
 }
 
@@ -110,13 +110,13 @@
   border-style: none;
   text-shadow: none;
   letter-spacing: 2px;
-  color: var(--color-light);
+  color: var(--color-white);
   outline: none;
   
 }
 
 .other-inputs input[type="text"]::-webkit-input-placeholder {
-    color: var(--color-light);
+    color: var(--color-white);
     letter-spacing: 2px;
   }
 

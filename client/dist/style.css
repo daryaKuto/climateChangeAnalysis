@@ -10,12 +10,12 @@
 }
 
 :root {
-  --color-bg: #f6efe8;
-  --color-bg-variant: #d4edf4;
-  --color-primary: #345c72;
-  --color-primary-variant: #ff9e7a;
+  --color-bg: #ece4de;
+  --color-bg-variant: #D8E3DD;
+  --color-primary: #417490;
+  --color-primary-variant: #C26C49;
   --color-white: white;
-  --color-light: #d4edf4;
+  --color-light: #f8bf9e;
 
   --transition: all 400ms ease;
 
@@ -58,6 +58,7 @@ body {
 
 .about {
   grid-column: 1/-1;
+  max-width: 1200px;
 }
 /* 
 .modal {
@@ -71,14 +72,16 @@ body {
 
 .footer_container {
   grid-column: 1/-1;
+   grid-row: 5;
   max-width: 1200px;
+  height: 1000px;
 }
 
 /* Media queries (tablets) */
 @media screen and (max-width: 1024px) {
   .main {
     width: var(--container-width-md);
-    background-color: rgb(226, 178, 230);
+    /* background-color: rgb(226, 178, 230); */
   }
   /* section {
     margin-top: 1rem;
@@ -86,16 +89,19 @@ body {
   .wrapper {
     max-width: 1000px;
   }
-  .footer_container {
+  .about {
     max-height: 70%;
   }
+  /* .footer_container {
+    max-height: 80%;
+  } */
 }
 
 /* Media queries (phones) */
 @media screen and (max-width: 600px) {
   .main {
     width: var(--container-width-sm);
-    background-color: rgb(239, 207, 169);
+    /* background-color: rgb(239, 207, 169); */
   }
   /* section > h2 {
     margin-bottom: 1rem;
@@ -103,7 +109,10 @@ body {
   .wrapper {
     max-width: 700px;
   }
-  .footer_container {
+  /* .footer_container {
+    max-height: 80%;
+  } */
+  .about {
     max-height: 60%;
   }
 }

@@ -48,7 +48,7 @@ const Stats = ({
   searchByZip,
   searchZpid,
 }) => {
-  console.log(property);
+  //console.log(property);
   const [floor, setFloor] = useState([]);
   const [appliances, setAppliances] = useState([]);
   const [parking, setParking] = useState([]);

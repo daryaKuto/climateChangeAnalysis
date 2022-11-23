@@ -1,3 +1,11 @@
 .footer_container {
-    background-color: var(--color-primary-variant);
+    display: flex;
+    align-items: flex-end;
+    font-size: small;
+    font-weight: 500;
+}
+.footer_container p {
+    padding: 7px;
+    border-radius: 7px;
+    background-color: var(--color-bg-variant);
 }
