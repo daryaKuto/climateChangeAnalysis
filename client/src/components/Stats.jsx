@@ -260,9 +260,11 @@ const changeHouse = (address) => {
         {(Array.isArray(taxHist) &&
         taxHist.length >= 1) ? taxHist.map((taxYear) => {
           var humanDate = new Date(taxYear.time);
+          var fullDate = humanDate.toGMTString();
+          var slicedDate = fullDate.slice(0,16);
           return (
             <div className="tax_year">
-              <p className="tax_stats">{humanDate.toGMTString()}</p>
+              <p className="tax_stats">{slicedDate}</p>
               <p className="tax_stats">{taxYear.taxPaid ? "$" + numberWithCommas(taxYear.taxPaid) : "Not Provided"}</p>
               <p className="tax_stats">
                 {(taxYear.taxIncreaseRate * 100).toFixed(1)}%
