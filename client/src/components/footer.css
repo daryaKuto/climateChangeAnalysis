@@ -5,6 +5,7 @@
     font-weight: 500;
 }
 .footer_container p {
+    width: 100%;
     padding: 7px;
     border-radius: 7px;
     background-color: var(--color-bg-variant);

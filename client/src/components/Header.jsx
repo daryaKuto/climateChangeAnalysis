@@ -5,10 +5,10 @@ import headerCSS from './header.css';
 const Header = () => (
   <div className="title">
     <h1>Will your property investment be safe in years of climate change?</h1>
-    <span>
+    <h3 id = "desc">
       THIS SEARCH COMBINES ALL FACTORS FROM A
       CLIMATE CHANGE REPORT CITED IN THE FOOTER
-    </span>
+    </h3>
   </div>
 );
 

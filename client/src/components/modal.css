@@ -2,7 +2,10 @@
     margin: 1rem; 
    max-width: 100%;
 }
-
+#county {
+  text-transform: uppercase;
+  font-weight: 700;
+}
 .stats {
   width: 100%;
   display: grid;
@@ -138,24 +141,78 @@
 
 /* Media queries (tablets) */
 @media screen and (max-width: 1024px) {
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  p {
+    font-size: 13px;
+  }
  .stats {
-  width: 90%;
   grid-template-columns: repeat(4, 1fr);
+  width: 90%;
  }
  .property_stats {
-  width: 90%;
   grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+ }
+ .tax_stats p {
+  font-size: 13px;
+ }
+ .zillow_stats p {
+  font-size: 13px;
+ }
+ .tax_heading {
+  font-size: 13px;
+ }
+ .tax_stats, .price_stats, .neighbor {
+  font-size: 13px;
+ }
+ .neighbor p {
+  font-size: 13px;
  }
 }
 
 /* Media queries (phones) */
 @media screen and (max-width: 600px) {
+  h2 {
+    font-size: 1rem;
+  }
+  h3 {
+    font-size: 0.75rem;
+  }
+  p {
+    font-size: 10px;
+  }
   .stats {
     grid-template-columns: repeat(3, 1fr);
-    width: 95%;
+    width: 100%;
    }
    .property_stats {
     grid-template-columns: repeat(3, 1fr);
-    width: 95%;
+    width: 100%;
    }
-}
+   .near_by_homes {
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+     }
+     .tax_stats p {
+      font-size: 10px;
+     }
+     .zillow_stats p {
+      font-size: 10px;
+     }
+     .tax_heading {
+      font-size: 10px;
+     }
+     .tax_stats, .price_stats, .neighbor {
+      font-size: 10px;
+     }
+     .neighbor p {
+      font-size: 10px;
+     }
+   }
+   
+  

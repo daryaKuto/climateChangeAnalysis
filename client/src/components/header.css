@@ -1,3 +1,27 @@
-/* .title {
-    margin: 1rem 2rem 2rem 1rem;
-} */
+.title {
+    /* margin: 1rem 2rem 2rem 1rem; */
+    padding-top: 1rem;
+    text-align: center;
+}
+h1 {
+    line-height: normal;
+}
+
+
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 2rem;
+    }
+    #desc {
+        font-size: 1rem;
+      }
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    #desc {
+        font-size: .65rem;
+      }
+}

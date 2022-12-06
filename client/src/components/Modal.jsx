@@ -61,7 +61,8 @@ const Modal = ({
     <div id="results">
       {/* {searched ? ( */}
       <div className="results">
-        <h2>Here is prediction for your zipcode: {results.county}</h2>
+        <h2>Here is prediction for your zipcode: </h2>
+        <h3 id = "county">{results.county}</h3>
         <h3>Once a scale 1 to 10 from least extreme to most</h3>
         <div className="stats">
           <div className="indv_stats">
@@ -94,6 +95,7 @@ const Modal = ({
             Property information provided by Zillow: <SiZillow />
           </h3>
           <Images images={images} />
+          <h2>Facts and Features</h2>
           <Stats
             property={property}
             taxHist={taxHist}

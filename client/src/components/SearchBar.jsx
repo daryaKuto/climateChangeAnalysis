@@ -179,7 +179,7 @@ const SearchBar = ({
                     const style = {
                       backgroundColor: suggestion.active ? "#bcd4f8" : "#fff",
                       margin: "10px",
-                      fontSize: "0.8rem",
+                      fontSize: "0.75rem",
                     };
 
                     return (

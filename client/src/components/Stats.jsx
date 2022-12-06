@@ -98,7 +98,6 @@ const changeHouse = (address) => {
 
   return (
     <div className="stats_wrapper">
-      <h2>Facts and Features</h2>
       <div className="property_stats">
         <div className="zillow_stats">
           <AiOutlineHome className="logo" />
@@ -173,8 +172,7 @@ const changeHouse = (address) => {
         </div>
         <div className="zillow_stats">
           <RiHome6Line className="logo" />
-          <div>
-            Floor Type:
+            <p>Floor Type:
             {(Array.isArray(resoFacts.flooring) && resoFacts.flooring.length >= 1)
               ? (
                 <div>
@@ -183,7 +181,7 @@ const changeHouse = (address) => {
                 </div>
               )
               : "Not Provided"}
-          </div>
+              </p>
         </div>
         <div className="zillow_stats">
           <MdHouseboat className="logo" />
