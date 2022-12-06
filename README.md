@@ -3,9 +3,10 @@ This is A PERN stack app (PosgreSQL, Express, React, Node) that combines climate
 
 Ho to use the website: <br>
 1. Search for any address in the search bar, click magnifying glass icon to search or X to clear the field. <br>
-2. Once the search is complete, you can see the scale from 1 to 10 how much the property will be affected and in categories such as Extreme Heat, Humidity, Crop Yields, Sea Level Rise, Fires and Economic damage to the area. <br>
+2. Once the search is complete, you can see the scale from 1 to 10 (1 being lest and 10 the worst) how much the property will be affected and in categories such as Extreme Heat, Humidity, Crop Yields, Sea Level Rise, Fires and Economic damage to the area. <br>
 3. Below the scale you can see the images of the property pulled from Zillow and more information about the property, tax and price histories, near by homes and schools. <br>
 
-AWS Deployed version can be accessed on daryakutovaya.org
+AWS Deployed version can be accessed on daryakutovaya.com
 
-<img width="1299" alt="Screenshot 2022-12-04 at 2 08 02 PM" src="https://user-images.githubusercontent.com/55549546/205739728-1da7e7d7-f684-4949-ba1e-ce804b47c3a6.png">
+
+<img width="965" alt="Screenshot 2022-12-06 at 1 04 36 PM" src="https://user-images.githubusercontent.com/55549546/206022635-ef23e5a1-57e9-46e0-bdcf-55e8b2ccf093.png">
