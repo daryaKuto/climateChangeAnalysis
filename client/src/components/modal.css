@@ -208,6 +208,8 @@
       font-size: 10px;
      }
      .tax_stats, .price_stats, .neighbor {
+      padding: 3px;
+      margin: 3px;
       font-size: 10px;
      }
      .neighbor p {

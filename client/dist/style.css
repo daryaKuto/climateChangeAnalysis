@@ -41,7 +41,7 @@ body {
 #app {
   display: grid;
   justify-items: center;
-  max-height: fit-content;
+  /* height: 100%; */
 }
 .main {
   max-width: 1200px;
@@ -64,6 +64,7 @@ body {
 .about {
   grid-column: 1/-1;
   max-width: 1200px;
+  margin-left: 1rem;
 }
 /* 
 .modal {
@@ -87,21 +88,14 @@ body {
   .main {
     width: var(--container-width-md);
     margin: 1rem;
-    /* background-color: rgb(226, 178, 230); */
   }
 
-  /* section {
-    margin-top: 1rem;
-  } */
   .wrapper {
     max-width: 1000px;
   }
   .about {
-    max-height: 70%;
+    margin-left: 0.5rem;
   }
-  /* .footer_container {
-    max-height: 80%;
-  } */
 }
 
 /* Media queries (phones) */
@@ -111,20 +105,18 @@ body {
   }
   .main {
     width: var(--container-width-sm);
-    /* background-color: rgb(239, 207, 169); */
+    justify-items: center;
   }
-  /* section > h2 {
-    margin-bottom: 1rem;
-  } */
   .about {
-    max-height: 60%;
+    /* max-width: 338px; */
+    margin-left: 0.5rem;
   }
   .title {
   padding-top: 10px;
   }
  
   .wrapper {
-    max-width: 400px;
+    max-width: 370px;
   }
  
 }
