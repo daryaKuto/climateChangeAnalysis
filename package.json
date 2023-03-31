@@ -7,8 +7,8 @@
   "private": true,
   "main": "server/index.js",
   "engines": {
-    "node": "16.15.1",
-    "npm": "8.11.0"
+    "node": "16.19.0",
+    "npm": "8.19.3"
   },
   "scripts": {
     "start": "nodemon server/index.js",
@@ -25,8 +25,8 @@
     "nodemon": "^2.0.7",
     "style-loader": "^3.3.1",
     "url-loader": "^4.1.1",
-    "webpack": "^5.67.0",
-    "webpack-cli": "^4.5.0"
+    "webpack": "^5.77.0",
+    "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
