@@ -1,29 +1,39 @@
 const { Pool, Client } = require("pg");
 require("dotenv").config();
 
+//PREV VERSION
+// const devConfig = {
+//   user: 'daryakutovaya' || process.env.PG_USER,
+//   host: 'localhost' || process.env.PG_HOST,
+//   database: 'climate_change' || process.env.PG_DATABASE,
+//   password: 'password' || process.env.PG_PASSWORD,
+//   port: process.env.PG_PORT || 5432,
+// }
 
-//another option:
-// const devConfig = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}:${process.env.PG_HOST}:${process.env.PG_PORT}:${process.env.PG_DATABASE}`;
-/* 
-PG_USER = daryakutovaya
-PG_HOST = localhost
-PG_DATABASE = climate_change
-PG_PASSWORD = password
-PG_PORT = 5432
-*/
+// const client = new Client(
+//   process.env.NODE_ENV === "production" ? proConfig : devConfig
+// );
+
+// client.connect();
+
+
+//HEROKU VERSION
+
 
 const devConfig = {
-  user: 'daryakutovaya' || process.env.PG_USER,
-  host: 'localhost' || process.env.PG_HOST,
-  database: 'climate_change' || process.env.PG_DATABASE,
-  password: 'password' || process.env.PG_PASSWORD,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT || 5432,
-}
+};
 
-//for heroku addon
-// const proConfig = {
-//   connectionString: process.env.DATABASE_URL,
-// }
+const proConfig = {
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+};
 
 const client = new Client(
   process.env.NODE_ENV === "production" ? proConfig : devConfig
