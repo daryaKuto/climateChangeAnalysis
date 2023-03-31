@@ -15,7 +15,11 @@ require("dotenv").config();
 // );
 
 // client.connect();
-
+/*
+// "start": "nodemon server/index.js",
+    // "heroku-postbuild": "npm install && npm run react-dev",
+    // "react-dev": "webpack --config ./webpack.config.js  -w"
+*/
 
 //HEROKU VERSION
 

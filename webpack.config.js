@@ -9,6 +9,7 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
+  target: 'node',
   devtool: 'source-map',
   module: {
     rules: [
